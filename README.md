@@ -4,9 +4,9 @@
 [x] button full extended (and with color)
 [x] metric with label hidden
 [x] Altair chart with theme
-[ ] dataframe
-[ ] widgets label with markdown
-[ ] st.info or success redesign
-[ ] st.progress
+[x] dataframe
+[x] widgets label with markdown
+[x] st.info or success redesign
+[x] st.progress
 [x] st.tabs
 [x] colored text in markdown

@@ -1,5 +1,7 @@
+import pandas as pd
 import plotly.express as px
 import streamlit as st
+
 from cols_in_cols import cols_in_cols110, cols_in_cols117
 
 st.set_page_config("Visual Changes from Streamlit 1.10 to 1.17", page_icon="🪄")
@@ -93,8 +95,13 @@ else:
 
 if version == "1.17":
     st.subheader(":red[Colors] in :blue[text]")
+    # blue, green, orange, red, violet
+    st.write(
+        "Adding :red[colors] to my :green[text] is **:orange[too] much :violet[fun]**"
+    )
 else:
     st.subheader("Colors in text")
+    st.write("Sure wish I could add colors to my text :(")
 
 add_section("Colors in text", silent=True)
 
@@ -116,5 +123,62 @@ else:
     elif section == "Section 2":
         st.write("**This is section 2**")
 
+
+add_section("Better column sizing in dataframes")
+
+
+@st.cache_data
+def get_data():
+    df = pd.read_csv(
+        "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv",
+        nrows=20,
+    )
+
+    return df
+
+
+if version == "1.17":
+    st.dataframe(get_data(), use_container_width=True)
+else:
+    st.image("old_dataframes.png", use_column_width=True)
+
+add_section("Widget labels with markdown")
+
+if version == "1.17":
+    st.text_input("Please, **please** type your name here :pleading_face:")
+    st.selectbox(
+        "How would you like to be [contacted](https://dictionary.cambridge.org/us/dictionary/english/contacted)?",
+        ("Carrier Pidgeon", "Email", "Mobile phone"),
+    )
+else:
+    st.text_input("Please, \*\*please\*\* type your name here \:pleadingˍface:")
+    st.selectbox(
+        "How would you like to be contacted?",
+        options=("Carrier Pidgeon", "Email", "Mobile phone"),
+    )
+
+
+add_section("Icons in Info and Success")
+
+if version == "1.17":
+    st.info("This is a really important message", icon="👀")
+    st.success("Good job!", icon="👍")
+    st.warning("Don't do this!", icon="❌")
+else:
+    st.info("This is a really important message")
+    st.success("Good job!")
+    st.warning("Don't do this!")
+
+add_section("Revamped progress")
+
+if version == "1.17":
+    st.progress(10)
+    st.progress(50)
+    st.progress(95)
+else:
+    st.image("progress_bars.png")
+
+
+# Add table of contents to sidebar
 for text, anchor in sections:
     st.sidebar.write(f"[{text}](#{anchor})")
